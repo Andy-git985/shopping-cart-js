@@ -32,15 +32,16 @@ const shopItemsData = [
 ];
 
 const generateShop = () => {
-  return (shop.innerHTML = shopItemsData.map((x) => {
-    return `
+  return (shop.innerHTML = shopItemsData
+    .map((x) => {
+      return `
     <div class="item">
-      <img width="223" src="images/img-1.jpg" alt="" />
+      <img width="223" src="${x.img}" alt="" />
       <div class="details">
-        <h3>Casual Shirt</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+        <h3>${x.name}</h3>
+        <p>${x.desc}</p>
         <div class="price-quantity">
-        <h2>$45</h2>
+        <h2>$${x.price}</h2>
         <div class="buttons">
           <i class="bi bi-dash-lg"></i>
           <div class="quantity">0</div>
@@ -50,7 +51,8 @@ const generateShop = () => {
     </div>
   </div>
     `;
-  }));
+    })
+    .join(''));
 };
 
 generateShop();
