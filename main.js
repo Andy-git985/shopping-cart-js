@@ -39,7 +39,7 @@ const generateShop = () => {
       const { id, name, price, desc, img } = x;
       return `
     <div id=product-id-${id} class="item">
-      <img width="223" src="${img}" alt="" />
+      <img width="220" src="${img}" alt="" />
       <div class="details">
         <h3>${name}</h3>
         <p>${desc}</p>
@@ -71,7 +71,6 @@ const increment = (id) => {
   } else {
     search.item += 1;
   }
-  // console.log(basket);
   update(selectedItem.id);
 };
 const decrement = (id) => {
@@ -81,10 +80,14 @@ const decrement = (id) => {
   else {
     search.item -= 1;
   }
-  // console.log(basket);
   update(selectedItem.id);
 };
 const update = (id) => {
   const search = basket.find((x) => x.id === id);
   document.getElementById(id).innerHTML = search.item;
+  calculation();
+};
+const calculation = () => {
+  const cartIcon = document.querySelector('#cartAmount');
+  cartIcon.textContent = basket.map((x) => x.item).reduce((p, c) => p + c, 0);
 };

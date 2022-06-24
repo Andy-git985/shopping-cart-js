@@ -52,19 +52,19 @@ body {
 
 .shop {
   display: grid;
-  grid-template-columns: repeat(4, 13.9375rem);
+  grid-template-columns: repeat(4, 14rem);
   gap: 30px;
   justify-content: center;
 }
 
 @media (max-width: 1000px) {
   .shop {
-    grid-template-columns: repeat(2, 13.9375rem);
+    grid-template-columns: repeat(2, 14rem);
   }
 }
 @media (max-width: 500px) {
   .shop {
-    grid-template-columns: repeat(1, 13.9375rem);
+    grid-template-columns: repeat(1, 14rem);
   }
 }
 
