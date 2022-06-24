@@ -1,0 +1,63 @@
+/**
+* ! This is how I better comments
+* ? This is the blue comments
+**/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+/**
+* ? Navbar styles are here
+**/
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #212529;
+  color: white;
+  padding: 1.5625rem 3.75rem;
+  margin-bottom: 30px;
+}
+
+.cart {
+  position: relative;
+  background-color: #fff;
+  color: #212529;
+  font-size: 1.875rem;
+  padding: 0.3125rem;
+  border-radius: 0.25rem;
+}
+
+.cartAmount {
+  position: absolute;
+  top: -0.9375rem;
+  right: -0.625rem;
+  font-size: 1rem;
+  background-color: red;
+  color: white;
+  padding: 0.1875rem;
+  border-radius: 0.1875rem;
+}
+
+/**
+* ? Shop items styles are here
+**/
+
+.shop {
+  display: grid;
+  grid-template-columns: repeat(4, 13.9375rem);
+  gap: 30px;
+  justify-content: center;
+}
+
+.item {
+  border: 2px solid black;
+  border-radius: 0.25rem;
+}
