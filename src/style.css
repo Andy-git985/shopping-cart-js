@@ -17,6 +17,11 @@ i {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 /**
 * ? Navbar styles are here
 **/
