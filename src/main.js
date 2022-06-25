@@ -1,41 +1,75 @@
-let shop = document.getElementById("shop");
+const shop = document.querySelector('#shop');
 
-let basket = JSON.parse(localStorage.getItem("data")) || [];
+const shopItemsData = [
+  {
+    id: 'cgbpkywbtx',
+    name: 'Casual Shirt',
+    price: 45,
+    desc: 'A casual oxford button dowwn suitable for any occasion.',
+    img: 'images/img-1.jpg',
+  },
+  {
+    id: 'wcmrjsupoc',
+    name: 'Office Shirt',
+    price: 100,
+    desc: 'Office shirt great with a flashy tie.',
+    img: 'images/img-2.jpg',
+  },
+  {
+    id: 'fdrydindhn',
+    name: 'T Shirt',
+    price: 25,
+    desc: 'Comfortable 100% cotton crewneck T-shirt.',
+    img: 'images/img-3.jpg',
+  },
+  {
+    id: 'eygiazhcay',
+    name: 'Mens Suit',
+    price: 300,
+    desc: 'When you are looking to nail that promotion or interview, reach for this.',
+    img: 'images/img-4.jpg',
+  },
+];
 
-let generateShop = () => {
+let basket = JSON.parse(localStorage.getItem('data')) || [];
+
+const generateShop = () => {
   return (shop.innerHTML = shopItemsData
     .map((x) => {
-      let { id, name, price, desc, img } = x;
+      const { id, name, price, desc, img } = x;
+      // ? handles the refresh
       let search = basket.find((x) => x.id === id) || [];
+      // ?  Below on:  <div id=${id} class="quantity">${
+      // ? search.item === undefined ? 0 : search.item
+      // ? }</div> On refresh populates the quantity field without pressing the buttons, previously field was 0
       return `
     <div id=product-id-${id} class="item">
-        <img width="220" src=${img} alt="">
-        <div class="details">
-          <h3>${name}</h3>
-          <p>${desc}</p>
-          <div class="price-quantity">
-            <h2>$ ${price} </h2>
-            <div class="buttons">
-              <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
-              <div id=${id} class="quantity">
-              ${search.item === undefined ? 0 : search.item}
-              </div>
-              <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
-            </div>
-          </div>
+      <img width="220" src="${img}" alt="" />
+      <div class="details">
+        <h3>${name}</h3>
+        <p>${desc}</p>
+        <div class="price-quantity">
+        <h2>$${price}</h2>
+        <div class="buttons">
+          <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
+          <div id=${id} class="quantity">${
+        search.item === undefined ? 0 : search.item
+      }</div>
+          <i onclick="increment(${id})"class="bi bi-plus-lg"></i>
         </div>
       </div>
+    </div>
+  </div>
     `;
     })
-    .join(""));
+    .join(''));
 };
 
 generateShop();
 
-let increment = (id) => {
-  let selectedItem = id;
-  let search = basket.find((x) => x.id === selectedItem.id);
-
+const increment = (id) => {
+  const selectedItem = id;
+  const search = basket.find((x) => x.id === selectedItem.id);
   if (search === undefined) {
     basket.push({
       id: selectedItem.id,
@@ -44,35 +78,34 @@ let increment = (id) => {
   } else {
     search.item += 1;
   }
-
-  // console.log(basket);
+  localStorage.setItem('data', JSON.stringify(basket));
   update(selectedItem.id);
-  localStorage.setItem("data", JSON.stringify(basket));
 };
-let decrement = (id) => {
-  let selectedItem = id;
-  let search = basket.find((x) => x.id === selectedItem.id);
-
+const decrement = (id) => {
+  const selectedItem = id;
+  const search = basket.find((x) => x.id === selectedItem.id);
+  // handles typeError search undefined error in console when you hit minus and nothing is in local storage
   if (search === undefined) return;
   else if (search.item === 0) return;
   else {
     search.item -= 1;
   }
+
   update(selectedItem.id);
+  // Deleted items with 0 quantity from local storage
   basket = basket.filter((x) => x.item !== 0);
-  // console.log(basket);
-  localStorage.setItem("data", JSON.stringify(basket));
+
+  localStorage.setItem('data', JSON.stringify(basket));
 };
-let update = (id) => {
-  let search = basket.find((x) => x.id === id);
-  // console.log(search.item);
+const update = (id) => {
+  const search = basket.find((x) => x.id === id);
   document.getElementById(id).innerHTML = search.item;
   calculation();
 };
-
-let calculation = () => {
-  let cartIcon = document.getElementById("cartAmount");
-  cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+const calculation = () => {
+  const cartIcon = document.querySelector('#cartAmount');
+  cartIcon.textContent = basket.map((x) => x.item).reduce((p, c) => p + c, 0);
 };
 
+// Handles the cart amount being 0 on refresh
 calculation();
