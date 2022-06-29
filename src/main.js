@@ -31,7 +31,7 @@ const generateShop = () => {
   </div>
     `;
     })
-    .join(''));
+    .join('')); // ? Gets rid of commas
 };
 
 generateShop();
