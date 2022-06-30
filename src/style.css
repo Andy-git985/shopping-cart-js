@@ -65,6 +65,7 @@ a {
   grid-template-columns: repeat(4, 14rem);
   gap: 30px;
   justify-content: center;
+  margin-bottom: 3.125rem;
 }
 
 @media (max-width: 1000px) {
@@ -81,6 +82,11 @@ a {
 .item {
   border: 2px solid black;
   border-radius: 0.25rem;
+}
+
+.item img {
+  width: 100%;
+  border-radius: 0.125rem 0.125rem 0 0;
 }
 
 .details {
