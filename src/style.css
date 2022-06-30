@@ -1,5 +1,5 @@
 /**
-* ! This is how I better comments
+* ! This is how I make better comments
 * ? This is the blue comments
 **/
 
@@ -29,6 +29,7 @@ a {
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #212529;
   color: white;
   padding: 1.5625rem 3.75rem;
