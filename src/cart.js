@@ -3,6 +3,7 @@ const shoppingCart = document.querySelector('#shopping-cart');
 
 let basket = JSON.parse(localStorage.getItem('data')) || [];
 
+// updated cart icon
 const calculation = () => {
   const cartIcon = document.querySelector('#cartAmount');
   cartIcon.textContent = basket.map((x) => x.item).reduce((p, c) => p + c, 0);
@@ -26,7 +27,7 @@ const generateCartItems = () => {
               <p>${search.name}</p>
               <p class="cart-item-price">$ ${search.price}</p>
             </h4>
-            <i class="bi bi-x-lg"></i>
+            <i onclick="removeItem(${id})" class="bi bi-x-lg"></i>
           </div>
 
           <div class="buttons">
@@ -68,6 +69,7 @@ const increment = (id) => {
   localStorage.setItem('data', JSON.stringify(basket));
   update(selectedItem.id);
 };
+
 const decrement = (id) => {
   const selectedItem = id;
   const search = basket.find((x) => x.id === selectedItem.id);
@@ -90,4 +92,45 @@ const update = (id) => {
   const search = basket.find((x) => x.id === id);
   document.getElementById(id).innerHTML = search.item;
   calculation();
+  totalAmount();
 };
+
+const removeItem = (id) => {
+  const selectedItem = id;
+  // console.log(selectedItem.id);
+  basket = basket.filter((x) => x.id !== selectedItem.id);
+  generateCartItems();
+  //  add this myself to make the cart icon update, diverged from tutorial
+  calculation();
+  totalAmount();
+  localStorage.setItem('data', JSON.stringify(basket));
+};
+
+const clearCart = () => {
+  basket = [];
+  generateCartItems();
+  // added this myself to clear cart icon
+  calculation();
+  localStorage.setItem('data', JSON.stringify(basket));
+};
+
+//  renderd total bill, checkout and clear cart section
+const totalAmount = () => {
+  if (basket.length !== 0) {
+    const amount = basket
+      .map((x) => {
+        let { item, id } = x;
+        let search = shopItemsData.find((y) => y.id === id) || [];
+        return item * search.price;
+      })
+      .reduce((x, y) => x + y, 0);
+    // console.log(amount);
+    label.innerHTML = `
+    <h2>Total Bill : $ ${amount}</h2>
+    <button class="checkout">Checkout</button>
+    <button onclick="clearCart()" class="remove-all">Clear Cart</button>
+    `;
+  } else return;
+};
+
+totalAmount();

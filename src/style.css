@@ -118,7 +118,9 @@ a {
   margin-bottom: 1.25rem;
 }
 
-.home-btn {
+.home-btn,
+.checkout,
+.remove-all {
   background-color: #212529;
   color: white;
   border: none;
@@ -126,6 +128,14 @@ a {
   border-radius: 0.1875rem;
   cursor: pointer;
   margin-top: 0.625rem;
+}
+
+.checkout {
+  background-color: green;
+}
+
+.remove-all {
+  background-color: red;
 }
 
 .bi-x-lg {
