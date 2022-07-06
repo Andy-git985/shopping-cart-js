@@ -66,6 +66,7 @@ const decrement = (id) => {
 
   localStorage.setItem('data', JSON.stringify(basket));
 };
+// Updates to current item count in between the plus minus buttons
 const update = (id) => {
   const search = basket.find((x) => x.id === id);
   document.getElementById(id).innerHTML = search.item;
